@@ -1,8 +1,10 @@
+
 import './App.css'
 import Student from './Student'
+import { useState } from 'react'
 
 function App() {
-  const etudiants=[
+  const [etudiants, setEtudiants] = useState([
     {
       prenom: "Zied",
       nom: "Sabkhi",
@@ -12,8 +14,11 @@ function App() {
       anneeEtude: "2ème année",
       groupe: "GLSI 2",
       ville: "Mahdia"
-    },
-    {
+    }
+  ])
+
+  function ajouterEtudiant() {
+    const nouvelEtudiant = {
       prenom: "Ahmed",
       nom: "Bannour",
       email: "ahmed@gmail.com",
@@ -23,10 +28,16 @@ function App() {
       groupe: "GLSI 2",
       ville: "Mahdia"
     }
-  ];
-  return(
-    <>
-      {etudiants.map((etudiant)=>(
+
+    setEtudiants([...etudiants, nouvelEtudiant])
+  }
+  return (
+    <div className='container'>
+      <button className='add-button' onClick={ajouterEtudiant}>
+        Ajouter un étudiant
+      </button>
+
+      {etudiants.map((etudiant) => (
         <Student
           key={etudiant.email}
           prenom={etudiant.prenom}
@@ -39,7 +50,7 @@ function App() {
           ville={etudiant.ville}
         />
       ))}
-    </>
+    </div>
   )
 }
 
